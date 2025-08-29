@@ -1,20 +1,25 @@
-name = "arsenic-service"
-type = "nodejs"
+# Fastly Compute@Edge package
 authors = ["Sm0key"]
+description = "Arsenic service at the edge"
+language = "nodejs"
+manifest_version = 3
+name = "arsenic-service"
+service_id = ""
 
-[setup.backends."origin"]
-description = "Primary backend"
-address = "66.179.254.164"
-port = 443
-use_ssl = true
+[setup]
 
-[setup.config_stores."auth_config".items.key]
-description = "API token for backend"
-input_type = "string"
+  [setup.backends]
 
-[edge]
-type = "nodejs"
-main = "src/index.js"
+    [setup.backends."origin"]
+      address = "66.179.254.164"
+      description = "Primary backend"
+      port = 443
 
-[build]
-build_command = "npm install"
+  [setup.config_stores]
+
+    [setup.config_stores.auth_config]
+
+      [setup.config_stores.auth_config.items]
+
+        [setup.config_stores.auth_config.items.key]
+          description = "API token for backend"
